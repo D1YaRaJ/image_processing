@@ -1,13 +1,13 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-img=cv2.imread(r'C:\Pictures\rose.jpg',cv2.IMREAD_GRAYSCALE)
+img=cv2.imread(r'C:\Pictures\rose.jpg')
 if img is None: 
     raise FileNotFoundError("The image file was not found.")
 _,bin_img=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
 kernel=np.ones((3,3),np.uint8)
-eroded=cv2.erode(bin_img,kernel)
-dilated=cv2.dilate(bin_img,kernel)
+eroded=cv2.erode(bin_img,kernel,iterations=1)
+dilated=cv2.dilate(bin_img,kernel,iterations=1)
 opening=cv2.morphologyEx(bin_img,cv2.MORPH_OPEN,kernel)
 closing=cv2.morphologyEx(bin_img,cv2.MORPH_CLOSE,kernel)
 titles=['Original Binary','Eroded','Dilated','Opening','Closing']
